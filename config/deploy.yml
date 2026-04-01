@@ -1,0 +1,31 @@
+service: evolution-api
+
+image: evolution-api
+
+primary_role: evolution
+
+servers:
+  evolution:
+    hosts:
+      - <%= ENV['SERVER']%>
+    proxy: false
+    options:
+      network-alias: evolution-api
+
+registry:
+  server: localhost:5555
+
+builder:
+  arch: amd64
+
+env:
+  clear:
+    DATABASE_PROVIDER: postgresql
+    QRCODE_COLOR: "#000000"
+    TELEMETRY_ENABLED: false
+  secret:
+    - DATABASE_CONNECTION_URI
+    - AUTHENTICATION_API_KEY
+
+volumes:
+  - evolution_instances:/evolution/instances

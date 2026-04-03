@@ -448,7 +448,7 @@ export class ConfigService {
     this.env = this.envProcess();
     this.env.PRODUCTION = process.env?.NODE_ENV === 'PROD';
     if (process.env?.DOCKER_ENV === 'true') {
-      this.env.SERVER.TYPE = process.env.SERVER_TYPE as 'http' | 'http';
+      this.env.SERVER.TYPE = (process.env.SERVER_TYPE as 'http' | 'https') || 'http';
       this.env.SERVER.PORT = Number.parseInt(process.env.SERVER_PORT) || 8080;
     }
   }
@@ -476,7 +476,7 @@ export class ConfigService {
       },
       PROVIDER: {
         ENABLED: process.env?.PROVIDER_ENABLED === 'true',
-        HOST: process.env.PROVIDER_HOST,
+        HOST: process.env?.PROVIDER_HOST || '',
         PORT: process.env?.PROVIDER_PORT || '5656',
         PREFIX: process.env?.PROVIDER_PREFIX || 'evolution',
       },

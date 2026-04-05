@@ -29,3 +29,6 @@ env:
 
 volumes:
   - evolution_instances:/evolution/instances
+
+aliases:
+  logs: app logs -f

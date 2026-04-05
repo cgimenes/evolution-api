@@ -30,6 +30,8 @@ RUN ./Docker/scripts/generate_database.sh
 
 RUN npm run build
 
+RUN rm -f ./.env
+
 FROM node:24-alpine AS final
 
 RUN apk update && \
@@ -48,7 +50,6 @@ COPY --from=builder /evolution/dist ./dist
 COPY --from=builder /evolution/prisma ./prisma
 COPY --from=builder /evolution/manager ./manager
 COPY --from=builder /evolution/public ./public
-COPY --from=builder /evolution/.env ./.env
 COPY --from=builder /evolution/Docker ./Docker
 COPY --from=builder /evolution/runWithProvider.js ./runWithProvider.js
 COPY --from=builder /evolution/tsup.config.ts ./tsup.config.ts

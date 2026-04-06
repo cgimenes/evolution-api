@@ -1,6 +1,6 @@
 service: evolution-api
 
-image: evolution-api
+image: cgimenes/evolution-api
 
 primary_role: evolution
 
@@ -13,7 +13,9 @@ servers:
       network-alias: evolution-api
 
 registry:
-  server: localhost:5555
+  username: cgimenes
+  password:
+    - KAMAL_REGISTRY_PASSWORD
 
 builder:
   arch: amd64
